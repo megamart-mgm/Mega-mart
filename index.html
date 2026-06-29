@@ -1286,47 +1286,54 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <i class="fas fa-shopping-basket"></i> Mega Mart
-            </div>
-            
-            <button class="menu-toggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+   <header class="header">
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-shopping-basket"></i> Mega Mart
+        </div>
+        
+        <!-- Mobile menu toggle (Hamburger icon) -->
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Main navigation menu -->
+        <nav class="nav">
+            <!-- Close button for mobile menu -->
+            <button class="close-menu" aria-label="Close navigation">
+                <i class="fas fa-times"></i>
             </button>
 
-            <nav class="nav">
-                <button class="close-menu" aria-label="Close navigation">
-                    <i class="fas fa-times"></i>
-                </button>
-                <a href="how.html">How It Works</a>
-                <a href="price.html">Pricing</a>
+            <!-- Regular navigation links -->
+            <a href="how.html">How It Works</a>
+            <a href="price.html">Pricing</a>
 
-                <div class="dropdown">
-                    <button class="dropbtn">Features <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="features.html#digital">Sell Digital Products</a>
-                        <a href="features.html#physical">Sell Physical Products</a>
-                        <a href="features.html#affiliate">Become an Affiliate Marketer</a>
-                        <a href="features.html#services">Hire Services</a>
-                        <a href="features.html#tickets">Sell Tickets</a>
-                    </div>
+            <!-- Features Dropdown -->
+            <div class="dropdown">
+                <button class="dropbtn">Features <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="features.html#digital">Sell Digital Products</a>
+                    <a href="features.html#physical">Sell Physical Products</a>
+                    <a href="features.html#affiliate">Become an Affiliate Marketer</a>
+                    <a href="features.html#services">Hire Services</a>
+                    <a href="features.html#tickets">Sell Tickets</a>
                 </div>
-                <a href="learn.html">Learn</a>
-                <a href="affiliate.html">Affiliate Program</a>
-                
-                <div class="dropdown dropdown-selling">
-                    <button class="dropbtn btn-primary">Start Selling <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="signup.html">Start Selling</a>
-                        <a href="login.html">Log In</a>
-                    </div>
+            </div>
+            
+            <a href="learn.html">Learn</a>
+            <a href="affiliate.html">Affiliate Program</a>
+            
+            <!-- Start Selling Dropdown (with primary button styling) -->
+            <div class="dropdown dropdown-selling">
+                <button class="dropbtn btn-primary">Start Selling <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="signup.html">Start Selling</a>
+                    <a href="login.html">Log In</a>
                 </div>
-            </nav>
-        </div>
-    </header>
-
+            </div>
+        </nav>
+    </div>
+</header>
     <main>
         <section class="hero-section">
             <div class="container">
