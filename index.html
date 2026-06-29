@@ -552,19 +552,17 @@
         }
 
         .illustration-placeholder {
-            flex: 1;
-            min-width: 300px;
-            height: 250px;
-            background-color: var(--color-green-light);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 7rem;
-            color: var(--color-green-primary);
-            box-shadow: 0 8px 25px var(--color-shadow);
-            overflow: hidden; /* For images */
-        }
+    /* Ensures the container respects the image's aspect ratio or controls its own size */
+    display: flex; /* Helps in aligning the image if it's smaller */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+}
+
+.illustration-placeholder img {
+    max-width: 100%; /* Ensures the image is never wider than its container */
+    height: auto; /* Maintains the image's aspect ratio */
+    display: block; /* Removes any extra space below the image */
+}
         /* Specific images for placeholders */
         .show-love-section .illustration-placeholder {
             background: url('https://via.placeholder.com/400x300/e8f5e9/388E3C?text=Show+Love') center center / cover no-repeat;
