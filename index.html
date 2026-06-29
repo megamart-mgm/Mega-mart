@@ -423,36 +423,46 @@
 }
 
 /* For the container holding the logos */
+/* For the "Trusted by thousands..." text */
+.trusted-by-section p {
+    font-weight: bold; /* Makes the text bold */
+    text-align: center; /* Centers the text */
+    margin-bottom: 20px; /* Adds space below the text */
+    font-size: 1.2em; /* Slightly larger text for emphasis */
+}
+
+/* For the container holding the logos */
 .trusted-logos {
     display: flex; /* Arranges logos in a row */
     flex-wrap: wrap; /* Allows logos to wrap to the next line on smaller screens */
     justify-content: center; /* Centers logos horizontally */
-    gap: 100px; /* Adds space between logos */
-    padding: 50px 0; /* Adds vertical padding */
+    gap: 40px; /* Increased space between logos */
+    padding: 20px 0; /* Adds vertical padding */
 }
 
 /* For the individual logo images */
 .trusted-logos img {
-    max-width: 150px; /* Sets a maximum width for each logo */
+    max-width: 150px; /* Increased maximum width for each logo */
     height: auto; /* Maintains aspect ratio */
-    filter: grayscale(100%); /* Often used for "trusted by" sections to make logos subtle */
-    opacity: 1.5; /* Makes them slightly transparent */
-    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+    display: block; /* Ensures proper rendering */
+    transition: transform 0.3s ease; /* Smooth transition for a slight hover effect */
 }
 
 .trusted-logos img:hover {
-    opacity: 1; /* Full opacity on hover */
-    filter: grayscale(0%); /* Color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 /* Responsive adjustments for smaller screens (phones) */
 @media (max-width: 768px) {
     .trusted-logos {
-        gap: 20px; /* Reduce gap on smaller screens */
+        gap: 25px; /* Reduce gap on smaller screens */
     }
 
     .trusted-logos img {
-        max-width: 90px; /* Smaller logos on phones */
+        max-width: 100px; /* Adjust max-width for phone screens */
+    }
+    .trusted-by-section p {
+        font-size: 1em; /* Adjust text size for phones */
     }
 }
 
