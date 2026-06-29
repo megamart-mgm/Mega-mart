@@ -170,17 +170,9 @@
 }
 */
 
-/* --- Global Variables (Assuming you have them defined elsewhere) --- */
-/*
-:root {
-    --color-white: #ffffff;
-    --color-border-light: #e0e0e0;
-    --color-green-primary: #4CAF50; // Example green
-    --color-green-dark: #388E3C;   // Darker green
-    --color-green-light: #F1F8E9;  // Light green
-    --color-text-dark: #333333;
-}
-*/
+/* --- Global Variables --- */
+/* Ensure these are defined either directly or as :root variables in your actual CSS file */
+
 
 .header {
     background-color: var(--color-white);
@@ -214,7 +206,7 @@
 }
 
 /* --- Menu Toggle (Hamburger) & Close Button Base Styles --- */
-/* Hidden by default on desktop, will be shown/hidden conditionally on mobile */
+/* Default for both: hidden, non-interactive, absolute positioned */
 .menu-toggle,
 .close-menu {
     background: none;
@@ -222,10 +214,23 @@
     font-size: 2rem;
     cursor: pointer;
     z-index: 1002; /* Ensure these buttons are on top */
-    transition: transform 0.3s ease;
-    /* Important: Hide both by default, specific media queries will reveal them */
-    display: none; 
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Crucial: Prevents interaction when hidden */
+    position: absolute; /* Take out of flow to prevent overlap issues */
+    top: 20px;
+    right: 20px;
 }
+
+.menu-toggle {
+    color: var(--color-green-primary); /* Hamburger color */
+}
+.close-menu {
+    color: var(--color-text-dark); /* Close icon color */
+}
+
 .menu-toggle:active,
 .close-menu:active {
     transform: scale(0.9);
@@ -242,9 +247,9 @@
     height: 100%;
     background-color: var(--color-white);
     z-index: 1001; /* Below the menu/close buttons */
-    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother transition */
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     padding: 80px 20px 20px; /* Space for close button at the top */
-    overflow-y: auto; /* Enable scrolling if content is long */
+    overflow-y: auto;
 }
 
 .nav.active {
@@ -275,8 +280,7 @@
     border-bottom: 1px solid var(--color-border-light);
 }
 .dropdown:last-of-type {
-    /* If the last element in nav is a dropdown, remove its bottom border */
-    border-bottom: none;
+    border-bottom: none; /* Remove border from the last dropdown if it's the absolute last item */
 }
 
 .dropbtn {
@@ -307,10 +311,10 @@
     display: none; /* Hidden by default */
     flex-direction: column;
     background-color: var(--color-green-light);
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Inner shadow for depth */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
     width: 100%;
     padding: 10px 0;
-    z-index: 1; /* For desktop, ensure it's above other content */
+    z-index: 1; 
 }
 
 .dropdown.active .dropdown-content {
@@ -323,7 +327,7 @@
     text-decoration: none;
     display: block;
     text-align: left;
-    border-bottom: none; /* No border for internal dropdown links */
+    border-bottom: none;
     font-size: 1rem;
 }
 
@@ -337,7 +341,7 @@
     background-color: var(--color-green-primary);
     color: var(--color-white);
     padding: 15px 20px;
-    border-radius: 50px; /* Pill shape */
+    border-radius: 50px;
     margin-top: 20px;
     justify-content: center;
     font-size: 1.1rem;
@@ -362,30 +366,75 @@
 }
 
 
+/* --- MOBILE SPECIFIC VISIBILITY & POSITIONING (max-width) --- */
+@media (max-width: 768px) {
+    /* Show hamburger icon when menu is closed */
+    /* Target the menu-toggle button directly for full control */
+    .header .container > .menu-toggle {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        position: fixed; /* Keep it fixed to the viewport top right */
+        top: 20px;
+        right: 20px;
+        color: var(--color-green-primary);
+    }
+
+    /* Hide the close button when the menu is closed */
+    .close-menu {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    /* --- When the mobile menu IS ACTIVE (.nav.active) --- */
+    /* Hide the hamburger button (override previous rule) */
+    .header .container > .menu-toggle {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    /* Show the close button (inside the nav) */
+    .nav.active .close-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        position: absolute; /* Position relative to the open nav */
+        top: 20px;
+        right: 20px;
+        color: var(--color-text-dark);
+    }
+}
+
+
 /* --- DESKTOP STYLES (min-width) --- */
 @media (min-width: 769px) {
-    /* Hide menu toggles on desktop */
+    /* Absolutely ensure both buttons are hidden on desktop, no matter what */
     .menu-toggle,
     .close-menu {
-        display: none !important; /* Use !important to override any other display properties */
+        display: none !important; 
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     .nav {
-        /* Desktop: horizontal layout */
+        /* Override mobile menu styles for desktop */
         display: flex;
         flex-direction: row;
-        position: static; /* No fixed positioning */
+        position: static; /* Not fixed */
         width: auto;
         height: auto;
         background-color: transparent;
         padding: 0;
         overflow-y: visible;
-        transition: none; /* No transition for desktop nav */
+        transition: none;
     }
 
     .nav a {
-        border-bottom: none; /* Remove mobile borders */
-        padding: 0 15px; /* Adjust spacing */
+        border-bottom: none;
+        padding: 0 15px;
         text-align: center;
     }
     .nav a:last-of-type {
@@ -393,25 +442,25 @@
     }
 
     .dropdown {
-        border-bottom: none; /* Remove mobile borders */
+        border-bottom: none;
         width: auto;
     }
 
     .dropbtn {
-        padding: 0 15px; /* Adjust spacing */
-        border-bottom: none; /* Remove mobile borders */
+        padding: 0 15px;
+        border-bottom: none;
     }
 
     .dropdown-content {
         position: absolute;
         top: 100%;
-        left: 50%; /* Center dropdown under button */
+        left: 50%;
         transform: translateX(-50%);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Standard desktop dropdown shadow */
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         border-radius: 8px;
         padding: 10px 0;
-        background-color: var(--color-white); /* White background for desktop dropdowns */
-        flex-direction: column; /* Keep dropdown items stacked */
+        background-color: var(--color-white);
+        flex-direction: column;
         min-width: 200px;
     }
 
@@ -422,57 +471,18 @@
 
     /* Adjust 'Start Selling' button for desktop */
     .dropdown-selling {
-        border-bottom: none; /* Remove mobile border */
+        border-bottom: none;
     }
     .dropdown-selling .dropbtn {
-        margin-left: 20px; /* Space from other nav items */
-        margin-top: 0; /* Remove mobile top margin */
-        padding: 10px 25px; /* Desktop button size */
-        border-bottom: none; /* Ensure no border */
+        margin-left: 20px;
+        margin-top: 0;
+        padding: 10px 25px;
+        border-bottom: none;
     }
     .dropdown-selling .dropdown-content {
         left: auto;
-        right: 0; /* Align 'Start Selling' dropdown to the right */
+        right: 0;
         transform: translateX(0);
-    }
-}
-
-
-/* --- MOBILE SPECIFIC VISIBILITY RULES (max-width) --- */
-@media (max-width: 768px) {
-    /* Always show hamburger when the menu is NOT active */
-    .menu-toggle {
-        display: block;
-        color: var(--color-green-primary); /* Ensure color matches theme */
-    }
-
-    /* Hide the close button when the menu is NOT active */
-    .close-menu {
-        display: none;
-    }
-
-    /* --- When the mobile menu IS ACTIVE (.nav.active) --- */
-    /* Hide the hamburger button */
-    .nav.active ~ .menu-toggle {
-        display: none;
-    }
-
-    /* Show the close button */
-    .nav.active .close-menu {
-        display: block;
-        color: var(--color-text-dark); /* Ensure color is visible */
-    }
-
-    /* Ensure specific borders for last items on mobile */
-    .nav > .dropdown:last-of-type {
-        border-bottom: 1px solid var(--color-border-light); /* Ensure last dropdown has border if it's the actual last item */
-    }
-    .nav > .dropdown-selling .dropbtn {
-        border-bottom: none; /* Ensure button doesn't have a bottom border */
-    }
-    .nav > a:last-of-type {
-        /* If the very last item in the nav is a link (not a dropdown), remove its border */
-        border-bottom: none;
     }
 }
 
