@@ -1,1 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Mega Mart</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Variables for Colors */
+        :root {
+            --color-white: #ffffff;
+            --color-green-primary: #4CAF50; /* A vibrant green */
+            --color-green-dark: #388E3C;   /* A darker green for accents */
+            --color-green-light: #e8f5e9;  /* Very light green for subtle backgrounds */
+            --color-text-dark: #2c3e50; /* Darker for better contrast */
+            --color-text-light: #555555;
+            --color-border-light: #e0e0e0;
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            --color-shadow-hover: rgba(0, 0, 0, 0.15);
+        }
 
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-light);
+            background-color: var(--color-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--color-green-primary);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-green-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text-dark);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 700;} /* Mobile default */
+        h2 { font-size: 2rem; font-weight: 600;} /* Mobile default */
+        h3 { font-size: 1.5rem; font-weight: 500;} /* Mobile default */
+
+        .subtitle {
+            font-size: 1.1rem; /* Mobile default */
+            color: var(--color-green-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .section {
+            padding: 60px 0; /* Reduced padding for mobile */
+            background-color: var(--color-white);
+            text-align: center; /* Default center alignment for sections */
+        }
+
+        .section:nth-of-type(even) { /* Better selector for alternating backgrounds */
+            background-color: var(--color-green-light);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-md { margin-top: 30px; }
+        .mt-lg { margin-top: 40px; }
+
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; /* Use flex for icon alignment if needed */
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px; /* Adjust size for modern look */
+            border-radius: 50px; /* Pill shape for cool factor */
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--color-green-primary);
+            color: var(--color-white);
+            border-color: var(--color-green-primary);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-green-dark);
+            border-color: var(--color-green-dark);
+            transform: translateY(-2px); /* Subtle hover animation */
+            box-shadow: 0 6px 16px rgba(56, 142, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-white);
+            color: var(--color-green-primary);
+            border-color: var(--color-green-primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-green-light);
+            color: var(--color-green-dark);
+            border-color: var(--color-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .btn-large {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+
+        .btn-link {
+            color: var(--color-green-primary);
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
+            position: relative;
+        }
+        .btn-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-green-primary);
+            transition: width 0.3s ease;
+        }
+        .btn-link:hover::after {
+            width: 100%;
+        }
+       
+        /* --- Header Styles for How It Works Page --- */
+        .how-works-header {
+            background-color: var(--color-white);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--color-border-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .how-works-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 10px; /* Space between items */
+        }
+
+        .how-works-header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-green-primary);
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.5px;
+        }
+
+        .how-works-header .logo i {
+            margin-right: 8px;
+            color: var(--color-green-primary);
+        }
+
+        .how-works-header .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap; /* Allow buttons to wrap */
+        }
+        .how-works-header .header-buttons .btn {
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            white-space: nowrap; /* Prevent button text from wrapping */
+        }
+
+        /* Hero Section for How It Works */
+        .how-works-hero {
+            background-color: var(--color-green-primary);
+            color: var(--color-white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        .how-works-hero h1 {
+            color: var(--color-white);
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .how-works-hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* How It Works Steps */
+        .how-works-steps-section {
+            background-color: var(--color-white);
+            padding: 80px 0;
+        }
+        .how-works-steps-section h2 {
+            margin-bottom: 50px;
+        }
+        .how-works-steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px; /* Space between step items */
+            position: relative;
+        }
+
+        .how-works-step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .how-works-step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-green-primary);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        .how-works-step-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            color: var(--color-text-dark);
+        }
+        .how-works-step-item p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Curve string for steps visual connection */
+        .curve-string {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px; /* Thin line */
+            background-color: var(--color-border-light);
+            z-index: 5;
+            top: calc(60px + 20px + 10px); /* Adjust based on step-number and margin */
+            bottom: calc(-50px - 20px); /* Adjust for spacing below */
+        }
+        /* Hide curve string for the last item, or adjust its height */
+        .how-works-steps-grid > div:last-child .curve-string {
+            display: none;
+        }
+
+        /* Products You Can Sell Section (reusing .product-types-grid from index) */
+        .how-works-products-section {
+            padding: 80px 0;
+            background-color: var(--color-green-light);
+        }
+        .how-works-products-section h2 {
+            margin-bottom: 50px;
+        }
+
+        /* Everything Done For You Section */
+        .how-works-payment-section {
+            padding: 80px 0;
+            background-color: var(--color-white);
+        }
+        .how-works-payment-section .container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            text-align: center;
+        }
+        .how-works-payment-section h2 {
+            margin-bottom: 20px;
+        }
+        .how-works-payment-section p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .how-works-payment-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .how-works-payment-logos img {
+            height: 40px; /* Adjust size as needed */
+            filter: grayscale(100%) brightness(0) invert(1) sepia(100%) hue-rotate(90deg) saturate(300%) contrast(100%); /* Green tint */
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .how-works-payment-logos img:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .how-works-payment-illustration {
+            width: 100%;
+            min-height: 250px;
+            background-color: var(--color-green-light);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .how-works-payment-illustration img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Payouts Section */
+        .how-works-payouts-section {
+            padding: 80px 0;
+            background-color: var(--color-green-light);
+        }
+        .how-works-payouts-section .container {
+            text-align: center;
+        }
+        .how-works-payouts-section h2 {
+            margin-bottom: 20px;
+        }
+        .how-works-payouts-section p {
+            font-size: 1.1rem;
+            color: var(--color-text-dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+
+        /* Desktop Adjustments for how.html */
+        @media (min-width: 768px) {
+            .how-works-header .logo {
+                font-size: 2.2rem;
+            }
+            .how-works-header .header-buttons .btn {
+                font-size: 1rem;
+                padding: 10px 20px;
+            }
+            .how-works-hero h1 {
+                font-size: 3.5rem;
+            }
+            .how-works-hero p {
+                font-size: 1.2rem;
+            }
+
+            .how-works-steps-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns for steps */
+                gap: 30px;
+                padding-top: 50px; /* Adjust if needed */
+            }
+            .how-works-step-item {
+                flex-direction: column; /* Ensure vertical layout for each step */
+                padding-bottom: 0;
+            }
+            .how-works-step-number {
+                margin-bottom: 25px;
+            }
+            .how-works-steps-grid .how-works-step-item:nth-child(even) {
+                /* No special vertical alignment needed for desktop in a grid */
+            }
+            .curve-string {
+                height: 100px; /* Fixed height for lines between steps */
+                width: 2px;
+                top: calc(60px + 25px); /* After the number and its margin */
+                left: 50%; /* Between items */
+                transform: translateX(-50%);
+            }
+            /* Hide the vertical line on desktop for the last step if it's not a connecting line */
+            .how-works-steps-grid .how-works-step-item:last-child .curve-string {
+                display: none;
+            }
+
+            /* For connecting lines between horizontal grid items (this is more complex) */
+            .how-works-steps-grid::before {
+                content: '';
+                position: absolute;
+                top: calc(60px / 2 + 25px); /* Half the number height + its bottom margin */
+                left: 0;
+                right: 0;
+                height: 2px; /* Horizontal line */
+                background-color: var(--color-border-light);
+                z-index: 4;
+            }
+            .how-works-steps-grid .how-works-step-item:first-child .curve-string,
+            .how-works-steps-grid .how-works-step-item:last-child .curve-string {
+                display: none; /* Hide the vertical string that was acting as connection */
+            }
+
+            .how-works-step-item:not(:last-child) .curve-string { /* Hide the last vertical string */
+                 display: none;
+            }
+
+            .how-works-payment-section .container {
+                flex-direction: row;
+                text-align: left;
+                gap: 60px;
+            }
+            .how-works-payment-illustration {
+                order: 2; /* Image on the right */
+                min-height: 350px;
+            }
+            .how-works-payment-section .content { /* Wrap text and logos */
+                flex: 1;
+            }
+            .how-works-payment-logos {
+                justify-content: flex-start;
+            }
+        }
+        /* Smallest mobile adjustments */
+        @media (max-width: 420px) {
+            .how-works-header .logo { font-size: 1.4rem; }
+            .how-works-header .header-buttons .btn { font-size: 0.8rem; padding: 6px 10px; }
+            .how-works-hero h1 { font-size: 2.2rem; }
+            .how-works-hero p { font-size: 0.9rem; }
+            .how-works-step-number { width: 50px; height: 50px; font-size: 1.5rem; }
+            .how-works-step-item h3 { font-size: 1.4rem; }
+        }
+
+        /* --- Reused / General styles for index.html elements on how.html --- */
+        /* These styles are taken directly from your index.html CSS for consistency */
+        .product-types-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 30px;
+            margin-top: 40px;
+            text-align: left; /* Align card content left */
+        }
+        .product-type-card {
+            background-color: var(--color-white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--color-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .product-type-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--color-shadow-hover);
+        }
+        .product-type-card i {
+            font-size: 3.5rem;
+            color: var(--color-green-primary);
+            margin-bottom: 20px;
+        }
+        .product-type-card h3 {
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .product-type-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        @media (min-width: 768px) {
+            .product-types-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 40px;
+            }
+        }
+
+        /* Footer reused from index.html */
+        .footer {
+            background-color: var(--color-text-dark);
+            color: var(--color-white);
+            padding: 60px 0 30px 0;
+            text-align: center;
+        }
+
+        .footer-top {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-green-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: -0.5px;
+        }
+        .footer-logo i {
+             margin-right: 8px;
+             color: var(--color-green-primary);
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-direction: column; /* Stack vertically for mobile */
+            gap: 25px;
+        }
+
+        .footer-col {
+            min-width: unset;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-col h3 {
+            color: var(--color-white);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            display: inline-block; /* For better hover target */
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--color-green-primary);
+            transform: translateX(5px); /* Subtle slide on hover */
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.4rem; /* Larger icons */
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-green-primary);
+            transform: translateY(-3px);
+        }
+
+        @media (min-width: 768px) {
+            .footer-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                text-align: left;
+                gap: 40px;
+            }
+
+            .footer-logo {
+                font-size: 2.2rem;
+                justify-content: flex-start;
+            }
+
+            .footer-nav {
+                flex-direction: row;
+                gap: 60px; /* More space between columns */
+            }
+
+            .footer-col {
+                min-width: 150px;
+                width: auto;
+                text-align: left;
+            }
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 0;
+            }
+            .social-links {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="how-works-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shopping-basket"></i> Mega Mart
+            </a>
+            <div class="header-buttons">
+                <a href="index.html" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Back</a>
+                <a href="signup.html" class="btn btn-primary">Start Selling Today</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="how-works-hero">
+            <div class="container">
+                <h1>How It Works</h1>
+                <p>In less than 5 minutes, you can get started selling your digital products and services for free.</p>
+            </div>
+        </section>
+
+        <section class="section how-works-steps-section">
+            <div class="container">
+                <h2>It’s Simple and Easy to Set Up</h2>
+                <div class="how-works-steps-grid">
+                    <div class="how-works-step-item">
+                        <div class="how-works-step-number">1</div>
+                        <h3>Sign up and set up your payouts</h3>
+                        <p>Create your Mega Mart account in minutes and add your bank details. Choose how you want to get paid and set your preferred currencies for selling locally or globally.</p>
+                        <div class="curve-string"></div>
+                    </div>
+                    <div class="how-works-step-item">
+                        <div class="how-works-step-number">2</div>
+                        <h3>Create and upload your products</h3>
+                        <p>Add your products to Mega Mart by uploading your files, setting prices, and filling in product details. Customize your product page and link to match your brand.</p>
+                        <div class="curve-string"></div>
+                    </div>
+                    <div class="how-works-step-item">
+                        <div class="how-works-step-number">3</div>
+                        <h3>Share your link and start selling</h3>
+                        <p>Share your store or product link anywhere you have an audience. After a purchase, Mega Mart automatically gives the buyer access to your product and handles your payout.</p>
+                        <!-- No curve-string for the last item -->
+                    </div>
+                </div>
+                <div class="text-center mt-lg">
+                    <a href="signup.html" class="btn btn-primary btn-large">Start Selling with Mega Mart</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-you-can-sell" class="section how-works-products-section">
+            <div class="container">
+                <h2>Sell Any Kind of Product, Service, or Subscription</h2>
+                <div class="product-types-grid">
+                    <div class="product-type-card">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <h3>Digital Products</h3>
+                        <p>Sell any and every kind of digital product, from content packs to designs to bundles and more without stress.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Ebooks</h3>
+                        <p>Mega Mart is the best platform to sell your ebooks, downloadable or non-downloadable, in any format.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Courses & Memberships</h3>
+                        <p>Host your courses & membership sites with unlimited videos & files, unlimited storage, and have unlimited students. Plus, get content security.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>Event Tickets & Training</h3>
+                        <p>Sell tickets for all kinds of events and access to masterclasses, workshops, webinars, and more.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Services</h3>
+                        <p>Offer any kind of service, from coaching to consultations to design services and more.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Physical Goods</h3>
+                        <p>You can also use Mega Mart to sell your physical products, from clothing to electronics and appliances.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section how-works-payment-section">
+            <div class="container">
+                <div class="content">
+                    <h2>Everything is Done For You</h2>
+                    <p>We've integrated multiple payment gateways to ensure you can receive payments from anywhere in the world. Once you receive a payment, we pay you based on the settlement schedule.</p>
+                    <div class="how-works-payment-logos">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=PayPal" alt="PayPal Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=M-Pesa" alt="M-Pesa Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=MTN" alt="MTN Mobile Money Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=Airtel" alt="Airtel Mobile Money Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=Tigo" alt="Tigo Mobile Money Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=Stripe" alt="Stripe Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=MC" alt="MasterCard Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=Visa" alt="Visa Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=AmEx" alt="American Express Logo">
+                        <img src="https://via.placeholder.com/80x40/f0f0f0/008000?text=Verve" alt="Verve Logo">
+                    </div>
+                </div>
+                <div class="how-works-payment-illustration">
+                    <img src="https://via.placeholder.com/600x400/e8f5e9/388E3C?text=Payment+Solutions" alt="Payment solutions illustration">
+                </div>
+            </div>
+        </section>
+
+        <section class="section how-works-payouts-section">
+            <div class="container">
+                <h2>Payouts</h2>
+                <p>We work with multiple payment providers to facilitate payouts to bank accounts, mobile money wallets, and PayPal in all 14 countries we support. You get to sell in any currency and have the amount converted and credited in your country's local currency.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <i class="fas fa-shopping-basket"></i> Mega Mart
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h3>Products</h3>
+                        <ul>
+                            <li><a href="how.html">How It Works</a></li>
+                            <li><a href="features.html">Features</a></li>
+                            <li><a href="price.html">Pricing</a></li>
+                            <li><a href="affiliate.html">Affiliate Program</a></li>
+                            <li><a href="#">Sell Courses</a></li>
+                            <li><a href="#">Show Love</a></li>
+                            <li><a href="#">Tickets</a></li>
+                            <li><a href="#">Integrations</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Community</h3>
+                        <ul>
+                            <li><a href="#">Support & Resources</a></li>
+                            <li><a href="learn.html">Blog</a></li>
+                            <li><a href="#">Helpdesk & Guides</a></li>
+                            <li><a href="#">Creator Academy</a></li>
+                            <li><a href="#">Free Product Templates</a></li>
+                            <li><a href="#">Press & Media Kits</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">DMCA Takedown Form</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mega Mart. All Rights Reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
