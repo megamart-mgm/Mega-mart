@@ -1,745 +1,376 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-/* CSS Variables for Colors */
-:root {
-    --color-white: #ffffff;
-    --color-green-primary: #4CAF50; /* A vibrant green */
-    --color-green-dark: #388E3C;   /* A darker green for accents */
-    --color-green-light: #e8f5e9;  /* Very light green for subtle backgrounds */
-    --color-text-dark: #333333;
-    --color-text-light: #555555;
-    --color-border-light: #eeeeee;
-}
-
-/* Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: var(--color-text-light);
-    background-color: var(--color-white);
-    overflow-x: hidden; /* Prevent horizontal scroll from mobile menu */
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-green-primary);
-}
-
-a:hover {
-    color: var(--color-green-dark);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-h1, h2, h3 {
-    color: var(--color-text-dark);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-h1 { font-size: 2.2rem; } /* Mobile default */
-h2 { font-size: 1.8rem; } /* Mobile default */
-h3 { font-size: 1.4rem; } /* Mobile default */
-
-.subtitle {
-    font-size: 1.2rem; /* Mobile default */
-    color: var(--color-green-primary);
-    margin-bottom: 1.5rem;
-    font-weight: 500;
-}
-
-.section {
-    padding: 60px 0; /* Reduced padding for mobile */
-    background-color: var(--color-white);
-}
-
-.section:nth-child(even) {
-    background-color: var(--color-green-light);
-}
-
-.text-center {
-    text-align: center;
-}
-
-.mt-md { margin-top: 30px; }
-.mt-lg { margin-top: 40px; }
-
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 10px 20px; /* Smaller for mobile */
-    border-radius: 8px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    border: 2px solid transparent;
-    text-align: center;
-}
-
-.btn-primary {
-    background-color: var(--color-green-primary);
-    color: var(--color-white);
-    border-color: var(--color-green-primary);
-}
-
-.btn-primary:hover {
-    background-color: var(--color-green-dark);
-    border-color: var(--color-green-dark);
-}
-
-.btn-secondary {
-    background-color: var(--color-white);
-    color: var(--color-green-primary);
-    border-color: var(--color-green-primary);
-}
-
-.btn-secondary:hover {
-    background-color: var(--color-green-light);
-    color: var(--color-green-dark);
-    border-color: var(--color-green-dark);
-}
-
-.btn-large {
-    padding: 12px 25px; /* Adjust large button for mobile */
-    font-size: 1rem;
-}
-
-.btn-link {
-    color: var(--color-green-primary);
-    font-weight: 500;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-/* Header */
-.header {
-    background-color: var(--color-white);
-    padding: 15px 0; /* Smaller padding for mobile */
-    border-bottom: 1px solid var(--color-border-light);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.6rem; /* Smaller logo for mobile */
-    font-weight: 700;
-    color: var(--color-green-primary);
-    display: flex;
-    align-items: center;
-}
-
-.logo i {
-    margin-right: 8px;
-    color: var(--color-green-primary);
-}
-
-/* Mobile Navigation (Hidden by default) */
-.nav {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: -100%; /* Off-screen by default */
-    width: 100%; /* Full width for mobile */
-    height: 100%;
-    background-color: var(--color-white);
-    z-index: 1001;
-    transition: right 0.3s ease-in-out;
-    padding: 60px 20px 20px; /* Padding for content below close button */
-    overflow-y: auto; /* Enable scrolling for long menus */
-}
-
-.nav.active {
-    right: 0; /* Slide in */
-}
-
-.nav a {
-    color: var(--color-text-dark);
-    font-weight: 500;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--color-border-light);
-    width: 100%;
-    text-align: left;
-}
-
-.nav a:hover {
-    color: var(--color-green-primary);
-}
-
-.menu-toggle {
-    display: block; /* Always show on mobile */
-    background: none;
-    border: none;
-    font-size: 1.8rem; /* Larger toggle icon */
-    color: var(--color-green-primary);
-    cursor: pointer;
-    z-index: 1002; /* Above the nav */
-}
-
-.close-menu {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
-    cursor: pointer;
-    display: block; /* Always show in mobile menu */
-}
-
-/* Dropdown Styles */
-.dropdown {
-    position: relative;
-    width: 100%; /* Ensure dropdown takes full width in mobile menu */
-    border-bottom: 1px solid var(--color-border-light); /* Separator */
-}
-
-.dropdown:last-of-type {
-    border-bottom: none; /* No border for the last dropdown */
-}
-
-.dropbtn {
-    background-color: transparent;
-    color: var(--color-text-dark);
-    padding: 15px 0;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.dropbtn i {
-    margin-left: 10px;
-    transition: transform 0.3s ease;
-}
-
-.dropdown.active .dropbtn i {
-    transform: rotate(180deg);
-}
-
-.dropdown-content {
-    display: none;
-    flex-direction: column;
-    background-color: var(--color-green-light); /* Sub-menu background */
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    width: 100%;
-    padding: 10px 0;
-}
-
-.dropdown.active .dropdown-content {
-    display: flex;
-}
-
-.dropdown-content a {
-    color: var(--color-text-dark);
-    padding: 12px 20px; /* Indent dropdown items */
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    border-bottom: none; /* Remove border from dropdown items */
-}
-
-.dropdown-content a:hover {
-    background-color: rgba(0,0,0,0.05);
-    color: var(--color-green-dark);
-}
-
-/* Special styling for "Start Selling" dropdown button */
-.dropdown-selling .dropbtn {
-    background-color: var(--color-green-primary);
-    color: var(--color-white);
-    padding: 15px 20px; /* Adjusted padding for better button look */
-    border-radius: 8px;
-    margin-top: 20px;
-    justify-content: center; /* Center text and icon */
-}
-
-.dropdown-selling .dropbtn:hover {
-    background-color: var(--color-green-dark);
-}
-
-.dropdown-selling .dropbtn i {
-    color: var(--color-white);
-}
-
-.dropdown-selling .dropdown-content {
-    margin-top: 10px;
-}
-
-/* Hero Section */
-.hero-section {
-    padding: 80px 0;
-    text-align: center; /* Center content on mobile */
-}
-
-.hero-section .container {
-    flex-direction: column; /* Stack elements on mobile */
-    gap: 40px;
-}
-
-.hero-content {
-    min-width: unset;
-    width: 100%;
-}
-
-.hero-actions {
-    flex-direction: column; /* Stack buttons on mobile */
-    gap: 15px;
-    margin-top: 30px;
-    align-items: center; /* Center buttons */
-}
-
-.hero-actions .btn {
-    width: 80%; /* Make buttons wider */
-    max-width: 300px;
-}
-
-.hero-image-placeholder {
-    width: 100%; /* Full width for image */
-    height: 250px; /* Reduced height for mobile */
-    background: url('https://via.placeholder.com/600x450/e8f5e9/388E3C?text=Empowering+Sellers') center center / cover no-repeat;
-    border-radius: 12px;
-    border: 3px solid var(--color-green-light);
-    order: -1; /* Image above text on mobile */
-}
-
-/* Trusted By Section */
-.trusted-by-section {
-    padding: 20px 0;
-}
-.trusted-logos {
-    gap: 20px;
-}
-.trusted-logos img {
-    height: 30px; /* Smaller logos for mobile */
-}
-
-/* Product Types Section */
-.product-types-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 20px;
-}
-
-/* How It Works Section */
-.steps-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 20px;
-}
-
-/* Show Love & Global Payments Section (Two-column layout becomes single column) */
-.show-love-section .container,
-.global-payments-section .container,
-.ebook-cta-section .container {
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-}
-
-.global-payments-section .container {
-    flex-direction: column;
-}
-
-.content-left, .content-right {
-    min-width: unset;
-    width: 100%;
-}
-
-.illustration-placeholder {
-    min-width: unset;
-    width: 100%;
-    height: 200px; /* Smaller height for mobile */
-    font-size: 6rem;
-}
-
-.payment-logos {
-    justify-content: center;
-}
-
-/* Premium Features Section */
-.premium-tag {
-    margin-left: 0;
-    margin-top: 10px;
-    display: block; /* Stack tag below heading on mobile */
-}
-
-.features-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 20px;
-}
-
-/* Integrations Section */
-.integration-logos {
-    gap: 20px;
-}
-
-.integration-logos img {
-    height: 40px; /* Smaller for mobile */
-}
-
-/* Testimonials Section */
-.testimonials-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-    gap: 20px;
-}
-
-/* Ebook CTA Section */
-.ebook-cta-section .container {
-    flex-direction: column;
-}
-
-.ebook-illustration-placeholder {
-    height: 200px;
-    font-size: 6rem;
-}
-
-/* Final CTA Section */
-.final-cta-section {
-    padding: 80px 0; /* Reduced padding */
-}
-
-.final-cta-section h2 {
-    font-size: 2.2rem;
-}
-
-.final-cta-actions {
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-.final-cta-actions .btn {
-    width: 80%;
-    max-width: 300px;
-}
-
-/* Footer */
-.footer-top {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 30px;
-    padding-bottom: 30px;
-}
-
-.footer-logo {
-    font-size: 1.6rem;
-}
-
-.footer-nav {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-
-.footer-col {
-    min-width: unset;
-    width: 100%;
-    text-align: center;
-}
-
-.footer-bottom {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-}
-.social-links {
-    justify-content: center;
-}
-
-
-/* Desktop Styles (Min-width media query to override mobile styles) */
-@media (min-width: 768px) {
-    h1 { font-size: 3.5rem; }
-    h2 { font-size: 2.2rem; }
-    h3 { font-size: 1.6rem; }
-    .subtitle { font-size: 1.4rem; }
-
-    .section {
-        padding: 80px 0;
-    }
-
-    .btn {
-        padding: 12px 25px;
-        font-size: 1rem;
-    }
-    .btn-large {
-        padding: 15px 35px;
-        font-size: 1.1rem;
-    }
-
-    /* Header */
-    .header {
-        padding: 20px 0;
-    }
-    .logo {
-        font-size: 1.8rem;
-    }
-    .nav {
-        display: flex; /* Always show nav on desktop */
-        flex-direction: row;
-        position: static; /* Remove fixed positioning */
-        width: auto;
-        height: auto;
-        background-color: transparent;
-        z-index: auto;
-        padding: 0;
-        overflow-y: visible;
-        border-top: none;
-        box-shadow: none;
-        flex: 1; /* Allow nav to take space */
-        justify-content: flex-end; /* Push nav links to the right */
-        gap: 20px; /* Space between main nav links */
-    }
-    .nav a {
-        padding: 0;
-        border-bottom: none;
-        width: auto;
-        text-align: left;
-    }
-    .menu-toggle, .close-menu {
-        display: none; /* Hide toggle buttons on desktop */
-    }
-
-    /* Dropdowns on Desktop */
-    .dropdown {
-        border-bottom: none; /* No border for dropdown on desktop */
-        position: relative;
-        width: auto;
-    }
-    .dropdown .dropbtn {
-        padding: 0;
-        width: auto;
-        justify-content: flex-start;
-        background-color: transparent;
-        color: var(--color-text-dark);
-    }
-    .dropdown .dropbtn:hover {
-         color: var(--color-green-primary);
-    }
-    .dropdown .dropbtn i {
-        color: var(--color-text-dark);
-        margin-left: 8px; /* Adjust icon spacing */
-    }
-    .dropdown:hover .dropbtn { /* Show dropdown on hover on desktop */
-        color: var(--color-green-primary);
-    }
-    .dropdown:hover .dropbtn i {
-        color: var(--color-green-primary);
-    }
-    .dropdown.active .dropbtn i {
-        transform: rotate(180deg); /* Rotate arrow when active */
-    }
-
-    .dropdown-content {
-        position: absolute;
-        display: none; /* Hidden by default on desktop */
-        background-color: var(--color-white);
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-        z-index: 1;
-        min-width: 220px; /* Wider for desktop */
-        left: 50%;
-        transform: translateX(-50%); /* Center dropdown under button */
-        padding: 10px 0;
-        border-radius: 8px;
-    }
-
-    .dropdown:hover .dropdown-content { /* Show on hover for desktop */
-        display: flex;
-    }
-
-    .dropdown-content a {
-        padding: 10px 20px;
-        border-bottom: none;
-    }
-
-    /* Start Selling dropdown button adjustments */
-    .dropdown-selling {
-        margin-left: 20px; /* Space out from other nav items */
-    }
-    .dropdown-selling .dropbtn {
-        background-color: var(--color-green-primary);
-        color: var(--color-white);
-        padding: 10px 20px;
-        border-radius: 8px;
-        margin-top: 0;
-        justify-content: center;
-        width: auto; /* Revert to auto width */
-    }
-    .dropdown-selling .dropbtn:hover {
-        background-color: var(--color-green-dark);
-    }
-     .dropdown-selling .dropbtn i {
-        color: var(--color-white); /* Ensure icon stays white */
-    }
-    .dropdown-selling .dropdown-content {
-        min-width: 180px;
-        margin-top: 0; /* Align with button */
-    }
-
-    /* Hero Section */
-    .hero-section .container {
-        flex-direction: row; /* Two columns on desktop */
-        text-align: left;
-    }
-    .hero-content {
-        min-width: 450px;
-        width: auto;
-    }
-    .hero-actions {
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top: 20px;
-    }
-    .hero-actions .btn {
-        width: auto;
-        max-width: unset;
-    }
-    .hero-image-placeholder {
-        order: unset; /* Revert order */
-        height: 450px;
-        min-width: 400px;
-        width: auto;
-    }
-
-    /* Trusted By Section */
-    .trusted-logos img {
-        height: 40px;
-    }
-
-    /* Product Types Section */
-    .product-types-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    /* How It Works Section */
-    .steps-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-    }
-
-    /* Show Love & Global Payments Section (Two-column layout) */
-    .show-love-section .container,
-    .global-payments-section .container,
-    .ebook-cta-section .container {
-        flex-direction: row;
-        text-align: left;
-        gap: 50px;
-    }
-
-    .global-payments-section .container {
-        flex-direction: row-reverse;
-    }
-
-    .illustration-placeholder {
-        height: 300px;
-        font-size: 8rem;
-    }
-
-    /* Premium Features Section */
-    .premium-tag {
-        margin-left: 15px;
-        margin-top: 0;
-        display: inline-block;
-    }
-    .features-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-    }
-
-    /* Integrations Section */
-    .integration-logos {
-        gap: 30px;
-    }
-    .integration-logos img {
-        height: 50px;
-    }
-
-    /* Testimonials Section */
-    .testimonials-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    /* Ebook CTA Section */
-    .ebook-illustration-placeholder {
-        height: 300px;
-        font-size: 8rem;
-    }
-
-    /* Final CTA Section */
-    .final-cta-section h2 {
-        font-size: 2.8rem;
-    }
-    .final-cta-actions {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    /* Footer */
-    .footer-top {
-        flex-direction: row;
-        align-items: flex-start;
-        text-align: left;
-        gap: 40px;
-    }
-
-    .footer-nav {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 40px;
-    }
-
-    .footer-col {
-        min-width: 150px;
-        width: auto;
-        text-align: left;
-    }
-
-    .footer-bottom {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 0;
-        text-align: left;
-    }
-    .social-links {
-        justify-content: flex-end;
-    }
-}
-
-/* Further smaller mobile adjustments */
-@media (max-width: 480px) {
-    .hero-actions .btn {
-        width: 100%; /* Full width buttons on very small screens */
-    }
-    .footer-col {
-        width: 100%; /* Stack footer columns */
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Mart - Your Global Marketplace, Free to Sell, Simple to Grow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shopping-basket"></i> Mega Mart
+            </div>
+            
+            <button class="menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav">
+                <button class="close-menu" aria-label="Close navigation">
+                    <i class="fas fa-times"></i>
+                </button>
+                <a href="how.html">How It Works</a>
+                <a href="price.html">Pricing</a>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Features <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="features.html#digital">Sell Digital Products</a>
+                        <a href="features.html#physical">Sell Physical Products</a>
+                        <a href="features.html#affiliate">Become an Affiliate Marketer</a>
+                        <a href="features.html#services">Hire Services</a>
+                        <a href="features.html#tickets">Sell Tickets</a>
+                    </div>
+                </div>
+                <a href="learn.html">Learn</a>
+                <a href="affiliate.html">Affiliate Program</a>
+                
+                <div class="dropdown dropdown-selling">
+                    <button class="dropbtn btn-primary">Start Selling <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="signup.html">Start Selling</a>
+                        <a href="login.html">Log In</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Mega Mart: Your Global Marketplace, Free to Sell, Simple to Grow.</h1>
+                    <p class="subtitle">The easiest way to sell your products and services online, to anyone, anywhere.</p>
+                    <p>Mega Mart is your all-in-one platform for listing and selling any kind of product or service – physical or digital – absolutely free. Unlock powerful marketing tools with our premium packages.</p>
+                    <div class="hero-actions">
+                        <a href="signup.html" class="btn btn-primary btn-large">Start Selling for Free</a>
+                        <a href="price.html" class="btn btn-secondary btn-large">Discover Premium Growth</a>
+                    </div>
+                </div>
+                <div class="hero-image-placeholder">
+                    <!-- Placeholder image with green tones -->
+                </div>
+            </div>
+        </section>
+
+        <section class="trusted-by-section">
+            <div class="container">
+                <p>Trusted by thousands of sellers worldwide.</p>
+                <div class="trusted-logos">
+                    <img src="https://via.placeholder.com/100x40/e8f5e9/388E3C?text=Brand1" alt="Brand 1 Logo">
+                    <img src="https://via.placeholder.com/100x40/e8f5e9/388E3C?text=Brand2" alt="Brand 2 Logo">
+                    <img src="https://via.placeholder.com/100x40/e8f5e9/388E3C?text=Brand3" alt="Brand 3 Logo">
+                </div>
+            </div>
+        </section>
+
+        <section id="what-you-can-sell" class="section product-types-section">
+            <div class="container">
+                <h2>Sell Any Kind of Product, Service, or Subscription</h2>
+                <div class="product-types-grid">
+                    <div class="product-type-card">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <h3>Digital Products</h3>
+                        <p>Sell any and every kind of digital product, from content packs to designs to bundles and more without stress.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Ebooks</h3>
+                        <p>Mega Mart is the best platform to sell your ebooks, downloadable or non-downloadable, in any format.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Courses & Memberships</h3>
+                        <p>Host your courses & membership sites with unlimited videos & files, unlimited storage, and have unlimited students. Plus, get content security.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>Event Tickets & Training</h3>
+                        <p>Sell tickets for all kinds of events and access to masterclasses, workshops, webinars, and more.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Services</h3>
+                        <p>Offer any kind of service, from coaching to consultations to design services and more.</p>
+                    </div>
+                    <div class="product-type-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Physical Goods</h3>
+                        <p>You can also use Mega Mart to sell your physical products, from clothing to electronics and appliances.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section how-it-works-section">
+            <div class="container">
+                <h2>It’s Simple and Easy to Set Up</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-user-plus"></i></div>
+                        <h3>1. Sign Up</h3>
+                        <p>Create your free account and securely set up your payment details.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-store"></i></div>
+                        <h3>2. List Products</h3>
+                        <p>Set up your store and upload your products with ease.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon"><i class="fas fa-share-alt"></i></div>
+                        <h3>3. Start Selling</h3>
+                        <p>Share your store link with customers and start getting paid right away!</p>
+                    </div>
+                </div>
+                <div class="text-center mt-lg">
+                    <a href="how.html" class="btn btn-secondary">Find Out More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section show-love-section">
+            <div class="container">
+                <div class="content-left">
+                    <h2>Give Your Fans an Easy Way to Show Love!</h2>
+                    <p>Mega Mart enables you to easily accept tips and donations from your supporters and fans from all over the world, adding another stream of income.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="illustration-placeholder">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="section global-payments-section">
+            <div class="container">
+                <div class="illustration-placeholder">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="content-right">
+                    <h2>Never Lose an International Customer Again!</h2>
+                    <p>We've integrated multiple payment gateways to ensure you can receive payments from anywhere in the world. We’ve also added support for local payment methods for our supported currencies, including PayPal and Stripe, so all your international customers can truly pay without any hassle.</p>
+                    <div class="payment-logos">
+                        <img src="https://via.placeholder.com/80x40/e8f5e9/388E3C?text=PayPal" alt="PayPal">
+                        <img src="https://via.placeholder.com/80x40/e8f5e9/388E3C?text=M-Pesa" alt="M-Pesa">
+                        <img src="https://via.placeholder.com/80x40/e8f5e9/388E3C?text=Stripe" alt="Stripe">
+                        <img src="https://via.placeholder.com/80x40/e8f5e9/388E3C?text=Visa" alt="Visa">
+                        <img src="https://via.placeholder.com/80x40/e8f5e9/388E3C?text=MC" alt="MasterCard">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="section premium-features-section">
+            <div class="container">
+                <h2>Make More Sales with the Right Tools <span class="premium-tag">(Premium Features)</span></h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Affiliate System</h3>
+                        <p>Set up your own affiliate marketing system and give commissions for anyone that facilitates a sale for your store. Drive more sales effortlessly.</p>
+                        <a href="features.html#affiliate" class="btn-link">Learn more</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Sales Pages</h3>
+                        <p>Create custom, high-converting sales/landing pages for your products. Descriptive pages drive more conversions.</p>
+                        <a href="features.html" class="btn-link">Learn more</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <h3>Automated Follow-ups</h3>
+                        <p>Never miss a prospective buyer with Mega Mart's automated follow-ups. Proven to drive conversions by at least 30%.</p>
+                        <a href="features.html" class="btn-link">Learn more</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Affiliate Challenges</h3>
+                        <p>Grow your sales and motivate affiliates to sell even more with leaderboard-based challenges, rewards, and automated tracking.</p>
+                        <a href="features.html#affiliate" class="btn-link">Learn more</a>
+                    </div>
+                </div>
+                <div class="text-center mt-lg">
+                    <a href="features.html" class="btn btn-secondary">See all features</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section integrations-section">
+            <div class="container">
+                <h2>Seamlessly Integrate Mega Mart with Your Favourite Tools</h2>
+                <p>Double your conversion by integrating your favorite marketing, analytics, and CRM tools on Mega Mart.</p>
+                <div class="integration-logos">
+                    <img src="https://via.placeholder.com/100x50/e8f5e9/388E3C?text=Facebook" alt="Facebook">
+                    <img src="https://via.placeholder.com/100x50/e8f5e9/388E3C?text=Mailchimp" alt="Mailchimp">
+                    <img src="https://via.placeholder.com/100x50/e8f5e9/388E3C?text=ConvertKit" alt="ConvertKit">
+                </div>
+                <div class="text-center mt-md">
+                    <a href="#" class="btn btn-secondary">See all integrations</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section testimonials-section">
+            <div class="container">
+                <h2>Don’t Take Our Word For It!</h2>
+                <p class="subtitle">See what some of our customers have to say about using Mega Mart.</p>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <p>"I’ve used quite a number of e-commerce platforms, but Mega Mart’s amazing! They’re truly interested in your growth and are constantly listening to the customers and tweaking and fine tuning their app. They do the heavy lifting. Totally recommend them!"</p>
+                        <p class="author">Steve Harris</p>
+                        <p class="title">Business Accelerator & Coach</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Mega Mart has an Affiliate System that works! They rescued me during my course launch. It’s easy to host your courses and digital products on Mega Mart and you can quickly receive your product payment from them."</p>
+                        <p class="author">Tricia Biz</p>
+                        <p class="title">Marketing & Launch Expert</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Anim nisi in sint proident pariatur fugiat quis ea cupidatat. Ipsum sit adipisicing in ut. Esse aliquip officia sunt anim incididunt irure ex cillum excepteur sit eu cupidatat laborum. Non commodo laborum tempor adipisicing esse et minim veniam cupidatat ipsum officia nostrud excepteur. In nisi sint ex dolore nostrud eu. Qui amet do consequat qui aute ad. Aute velit anim sit fugiat duis aliqua consectetur velit."</p>
+                        <p class="author">Jane Doe</p>
+                        <p class="title">Digital Creator</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section ebook-cta-section">
+            <div class="container">
+                <div class="ebook-content">
+                    <h2>Get Started Creating & Selling Products!</h2>
+                    <p>Whether you're a newbie or already selling online, we collaborated with experts to create THE ULTIMATE DIGITAL PRODUCT MANUAL. This free ebook will help you turn your knowledge into income via selling digital products and building a successful online business from home.</p>
+                    <a href="#" class="btn btn-primary btn-large">Get Free Ebook</a>
+                </div>
+                <div class="ebook-illustration-placeholder">
+                    <i class="fas fa-book"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="section final-cta-section">
+            <div class="container">
+                <h2>Start Selling with Mega Mart Today!</h2>
+                <p>Create a free account in less than 5 minutes and start selling to the world.</p>
+                <div class="final-cta-actions">
+                    <a href="signup.html" class="btn btn-primary btn-large">Get Started for Free</a>
+                    <a href="#" class="btn btn-secondary btn-large">See a Live Demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo">
+                    <i class="fas fa-shopping-basket"></i> Mega Mart
+                </div>
+                <div class="footer-nav">
+                    <div class="footer-col">
+                        <h3>Products</h3>
+                        <ul>
+                            <li><a href="how.html">How It Works</a></li>
+                            <li><a href="features.html">Features</a></li>
+                            <li><a href="price.html">Pricing</a></li>
+                            <li><a href="affiliate.html">Affiliate Program</a></li>
+                            <li><a href="features.html#courses">Sell Courses</a></li>
+                            <li><a href="#">Show Love</a></li>
+                            <li><a href="features.html#tickets">Tickets</a></li>
+                            <li><a href="features.html#integrations">Integrations</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Community</h3>
+                        <ul>
+                            <li><a href="#">Support & Resources</a></li>
+                            <li><a href="learn.html">Blog</a></li>
+                            <li><a href="#">Helpdesk & Guides</a></li>
+                            <li><a href="#">Creator Academy</a></li>
+                            <li><a href="#">Free Product Templates</a></li>
+                            <li><a href="#">Press & Media Kits</a></li>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h3>Legal</h3>
+                        <ul>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">DMCA Takedown Form</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mega Mart. All Rights Reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const closeMenu = document.querySelector('.close-menu');
+            const nav = document.querySelector('.nav');
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            // Toggle mobile menu
+            menuToggle.addEventListener('click', function() {
+                nav.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            });
+
+            closeMenu.addEventListener('click', function() {
+                nav.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Toggle dropdowns
+            dropdowns.forEach(dropdown => {
+                const dropbtn = dropdown.querySelector('.dropbtn');
+                dropbtn.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior if button is also a link
+                    dropdown.classList.toggle('active');
+                });
+
+                // Close dropdown if clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            });
+
+            // Close mobile menu when a nav item (or dropdown item) is clicked
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    document.body.style.overflow = '';
+                    dropdowns.forEach(d => d.classList.remove('active')); // Close any open dropdowns
+                });
+            });
+        });
+    </script>
+</body>
+</html>
